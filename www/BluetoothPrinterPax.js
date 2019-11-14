@@ -137,7 +137,7 @@ if (typeof BTPAlignmentType == "undefined"){
 
 
 //=================================================
-//PrinterInfoHelper
+//PrinterInfoHelperPax
 /* 所有参数
  var infoModel = new Object();
  infoModel.infoType = BTPInfoType.text;                 信息类型
@@ -152,12 +152,12 @@ if (typeof BTPAlignmentType == "undefined"){
 
 var _printerInfos = []; //保存信息的列表
 
-function PrinterInfoHelper(){};
+function PrinterInfoHelperPax(){};
 
 /*
  * 重置信息列表
  */
-PrinterInfoHelper.prototype.resetInfos = function(){
+PrinterInfoHelperPax.prototype.resetInfos = function(){
     _printerInfos = [];
 }
 
@@ -166,7 +166,7 @@ PrinterInfoHelper.prototype.resetInfos = function(){
  * alignment    : 对齐方式  optional   default: center
  * fontType     : 字号     optional    default: smalle
  */
-PrinterInfoHelper.prototype.appendText = function (text, alignment, fontType) {
+PrinterInfoHelperPax.prototype.appendText = function (text, alignment, fontType) {
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.text;
     infoModel.text = text;
@@ -179,7 +179,7 @@ PrinterInfoHelper.prototype.appendText = function (text, alignment, fontType) {
  * textList     : 信息列表，
  * isTitle      : 是否标题       optional   1是，0否，  default：0
  */
-PrinterInfoHelper.prototype.appendTextList = function (textList, isTitle, fontType) {
+PrinterInfoHelperPax.prototype.appendTextList = function (textList, isTitle, fontType) {
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.textList;
     infoModel.textArray = textList;
@@ -196,7 +196,7 @@ PrinterInfoHelper.prototype.appendTextList = function (textList, isTitle, fontTy
  * maxWidth     : 图片宽    optional   default:300
  * alignment    : 对齐方式  optional   default:center
  */
-PrinterInfoHelper.prototype.appendBarCode = function (text, maxWidth, alignment){
+PrinterInfoHelperPax.prototype.appendBarCode = function (text, maxWidth, alignment){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.barCode;
     infoModel.text = text;
@@ -210,7 +210,7 @@ PrinterInfoHelper.prototype.appendBarCode = function (text, maxWidth, alignment)
  * size(1-16)   : 图片大小  optional   default:12
  * alignment    : 对齐方式  optional   default:center
  */
-PrinterInfoHelper.prototype.appendQrCode = function (text, size, alignment){
+PrinterInfoHelperPax.prototype.appendQrCode = function (text, size, alignment){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.qrCode;
     infoModel.text = text;
@@ -224,7 +224,7 @@ PrinterInfoHelper.prototype.appendQrCode = function (text, size, alignment){
  * maxWidth     : 图片宽    optional   default:300
  * alignment    : 对齐方式  optional   default:center
  */
-PrinterInfoHelper.prototype.appendImage = function (text, maxWidth, alignment){
+PrinterInfoHelperPax.prototype.appendImage = function (text, maxWidth, alignment){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.image;
     infoModel.text = text;
@@ -234,27 +234,27 @@ PrinterInfoHelper.prototype.appendImage = function (text, maxWidth, alignment){
 }
 
 //分割线  ---------------------------
-PrinterInfoHelper.prototype.appendSeperatorLine = function(){
+PrinterInfoHelperPax.prototype.appendSeperatorLine = function(){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.seperatorLine;
     _printerInfos.push(infoModel);
 }
 
 //空行
-PrinterInfoHelper.prototype.appendSpaceLine = function(){
+PrinterInfoHelperPax.prototype.appendSpaceLine = function(){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.spaceLine;
     _printerInfos.push(infoModel);
 }
 
 //切纸
-PrinterInfoHelper.prototype.appendCutpage = function(){
+PrinterInfoHelperPax.prototype.appendCutpage = function(){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.cutpage;
     _printerInfos.push(infoModel);
 }
 
-PrinterInfoHelper.prototype.appendFooter = function(text){
+PrinterInfoHelperPax.prototype.appendFooter = function(text){
     var infoModel = new Object();
     infoModel.infoType = BTPInfoType.footer;
     infoModel.text = text;
@@ -262,24 +262,24 @@ PrinterInfoHelper.prototype.appendFooter = function(text){
 }
 
 // 获取打印信息的 json 字符串
-PrinterInfoHelper.prototype.getPrinterInfoJsonString = function(){
+PrinterInfoHelperPax.prototype.getPrinterInfoJsonString = function(){
     var jsonStr = JSON.stringify(_printerInfos);
     _printerInfos = [];
     return jsonStr;
 }
 
 var printerHelper = new BluetoothPrinter();
-var printerInfoHelper = new PrinterInfoHelper();
+var PrinterInfoHelperPax = new PrinterInfoHelperPax();
 
 window.printerHelper = printerHelper;
-window.printerInfoHelper = printerInfoHelper;
+window.PrinterInfoHelperPax = PrinterInfoHelperPax;
 window.BTPInfoType = BTPInfoType;
 window.BTPFontType = BTPFontType;
 window.BTPAlignmentType = BTPAlignmentType;
 
 
 module.exports.printerHelper = printerHelper;
-module.exports.printerInfoHelper = printerInfoHelper;
+module.exports.PrinterInfoHelperPax = PrinterInfoHelperPax;
 module.exports.BTPInfoType = BTPInfoType;
 module.exports.BTPFontType = BTPFontType;
 module.exports.BTPAlignmentType = BTPAlignmentType;
