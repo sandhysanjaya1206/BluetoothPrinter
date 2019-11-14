@@ -564,16 +564,19 @@ public class MKBluetoothPrinter extends CordovaPlugin {
 
 
                     /**获取打印图片的数据**/
-                    byte[] bitmapArray;
-                    bitmapArray = Base64.decode(text, Base64.DEFAULT);
-                    for (int n = 0; n < bitmapArray.length; ++n) {
-                        if (bitmapArray[n] < 0) {// 调整异常数据
-                            bitmapArray[n] += 256;
-                        }
+                    // byte[] bitmapArray;
+                    // bitmapArray = Base64.decode(text, Base64.DEFAULT);
+                    // for (int n = 0; n < bitmapArray.length; ++n) {
+                    //     if (bitmapArray[n] < 0) {// 调整异常数据
+                    //         bitmapArray[n] += 256;
+                    //     }
 
-                    }
+                    // }
 
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+                    byte[] decodeString = Base64.decode(text, Base64.DEFAULT);
+
+
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodeString, 0, bitmapArray.length);
 
 
                     bitmap =compressPic(bitmap);

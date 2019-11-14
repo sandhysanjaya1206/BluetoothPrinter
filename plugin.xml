@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
-        id="cordova-plugin-bluetooth-printer" 
-        version="1.0.1">
+        id="cordova-plugin-bluetooth-printer-pax" 
+        version="0.0.1">
     <engines>
         <engine name="cordova" version=">=6.5.0" />
     </engines>
 
-    <name>BluetoothPrinter</name>
-    <description>Cordova Bluetooth Printer Plugin</description>
+    <name>BluetoothPrinterPax</name>
+    <description>Cordova Bluetooth Printer Pax Plugin</description>
 
-    <js-module name="printerHelper" src="www/BluetoothPrinter.js">
-        <clobbers target="BluetoothPrinter" />
+    <js-module name="printerHelper" src="www/BluetoothPrinterPax.js">
+        <clobbers target="BluetoothPrinterPax" />
     </js-module>
 
     <!-- ios -->
