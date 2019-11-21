@@ -5,7 +5,8 @@
   "cordova": {
     "id": "cordova-plugin-bluetooth-printer-pax",
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "scripts": {
