@@ -7,7 +7,7 @@
     </engines>
 
     <name>BluetoothPrinterPax</name>
-    <description>Cordova Bluetooth Printer Pax Plugin</description>
+    <description>Cordova Bluetooth Printer Pax Plugin </description>
 
     <js-module name="printerHelper" src="www/BluetoothPrinterPax.js">
         <clobbers target="BluetoothPrinterPax" />
