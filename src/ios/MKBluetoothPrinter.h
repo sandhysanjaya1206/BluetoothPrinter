@@ -1,5 +1,5 @@
 //
-//  MKBluetoothPrinter.h
+//  MKBluetoothPrinterPax.h
 //  CordovaDemo
 //
 //  Created by xmk on 2017/6/20.
@@ -12,7 +12,7 @@
 
 typedef void(^CommandBlcok)(BOOL success, NSString *message);
 
-@interface MKBluetoothPrinter : CDVPlugin
+@interface MKBluetoothPrinterPax : CDVPlugin
 
 /*
  * 设置打印机纸张宽度

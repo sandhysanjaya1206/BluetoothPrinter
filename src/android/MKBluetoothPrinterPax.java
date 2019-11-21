@@ -35,6 +35,11 @@ import java.nio.charset.Charset;
 import java.util.Set;
 import java.util.UUID;
 
+import com.pax.dal.IPrinter;
+import com.pax.dal.entity.EFontTypeAscii;
+import com.pax.dal.entity.EFontTypeExtCode;
+import com.pax.dal.exceptions.PrinterDevException;
+
 // import android.content.ServiceConnection;
 // import android.content.ComponentName;
 // import android.content.Context;
@@ -46,7 +51,7 @@ import java.util.UUID;
 // import android.view.ContextThemeWrapper;
 
 
-public class MKBluetoothPrinter extends CordovaPlugin {
+public class MKBluetoothPrinterPax extends CordovaPlugin {
 
     private BluetoothAdapter mBluetoothAdapter;
 
@@ -63,6 +68,8 @@ public class MKBluetoothPrinter extends CordovaPlugin {
             .fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static  String  uuid_bl ="";
     private static  String name_bl ="";
+
+    private IPrinter printer;
 
     /**
      * 复位打印机
@@ -422,14 +429,14 @@ public class MKBluetoothPrinter extends CordovaPlugin {
                        }
 
                    if(LINE_BYTE_SIZE==32){
-                       MKBluetoothPrinter.printText("\n");
-                       MKBluetoothPrinter.printText("\n");
-                       MKBluetoothPrinter.printText("\n");
-                       MKBluetoothPrinter.printText("\n");
-                       MKBluetoothPrinter.printText("\n");
+                       MKBluetoothPrinterPax.printText("\n");
+                       MKBluetoothPrinterPax.printText("\n");
+                       MKBluetoothPrinterPax.printText("\n");
+                       MKBluetoothPrinterPax.printText("\n");
+                       MKBluetoothPrinterPax.printText("\n");
                    }
                    //结束循环时
-                    MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.getCutPaperCmd());
+                    MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.getCutPaperCmd());
 //                     JSONObject dataJson = new JSONObject(sendData);
 //                   ///获取globalDatatop数据
 //                   JSONArray top_array = dataJson.optJSONArray("globalDatatop");
@@ -439,8 +446,8 @@ public class MKBluetoothPrinter extends CordovaPlugin {
 //                   JSONArray persons_object = dataJson.optJSONArray("personsData");
 //
 //
-//                    MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.RESET);
-//                   MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.LINE_SPACING_DEFAULT);
+//                    MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.RESET);
+//                   MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.LINE_SPACING_DEFAULT);
 //
 //                   if (persons_object != null && persons_object.length() > 0) {
 //                       for (int j = 0; j < persons_object.length(); j++) {
@@ -472,11 +479,11 @@ public class MKBluetoothPrinter extends CordovaPlugin {
 //                                                    sendprint(jsonData);
 //                                               }
 //                                           }
-//                                           MKBluetoothPrinter.printText("\n");
-//                                           MKBluetoothPrinter.printText("\n");
+//                                           MKBluetoothPrinterPax.printText("\n");
+//                                           MKBluetoothPrinterPax.printText("\n");
 //
 //                                           //结束循环时
-//                                           MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.getCutPaperCmd());
+//                                           MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.getCutPaperCmd());
 //
 //
 //                               }
@@ -529,36 +536,36 @@ public class MKBluetoothPrinter extends CordovaPlugin {
                 //                       }
 
                 if (isTitle == 1) {
-                    MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.BOLD);
+                    MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.BOLD);
                 } else {
-                    MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.BOLD_CANCEL);
+                    MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.BOLD_CANCEL);
                 }
-               MKBluetoothPrinter.selectCommand(getAlignCmd(aligmentType_int));
-                MKBluetoothPrinter.selectCommand(getFontSizeCmd(fontType_int));
+               MKBluetoothPrinterPax.selectCommand(getAlignCmd(aligmentType_int));
+                MKBluetoothPrinterPax.selectCommand(getFontSizeCmd(fontType_int));
 
                 if (infoType == 0) {
-                    MKBluetoothPrinter.printText(text);
+                    MKBluetoothPrinterPax.printText(text);
                 } else if (infoType == 1) {
                     if (textArray != null && textArray.length() > 0) {
                         if (textArray.length() == 2) {
-                           MKBluetoothPrinter.printText(MKBluetoothPrinter.printTwoData(textArray.get(0).toString(), textArray.get(1).toString()));
+                           MKBluetoothPrinterPax.printText(MKBluetoothPrinterPax.printTwoData(textArray.get(0).toString(), textArray.get(1).toString()));
                         } else if (textArray.length() == 3) {
-                            MKBluetoothPrinter.printText(MKBluetoothPrinter.printThreeData(textArray.get(0).toString(), textArray.get(1).toString(), textArray.get(2).toString()));
+                            MKBluetoothPrinterPax.printText(MKBluetoothPrinterPax.printThreeData(textArray.get(0).toString(), textArray.get(1).toString(), textArray.get(2).toString()));
                         } else if (textArray.length() == 4) {
-                            MKBluetoothPrinter.printText(MKBluetoothPrinter.printFourData(textArray.get(0).toString(), textArray.get(1).toString(), textArray.get(2).toString(), textArray.get(3).toString()));
+                            MKBluetoothPrinterPax.printText(MKBluetoothPrinterPax.printFourData(textArray.get(0).toString(), textArray.get(1).toString(), textArray.get(2).toString(), textArray.get(3).toString()));
                         }
                     }
                 } else if (infoType == 2) {
-                    MKBluetoothPrinter.printText(getBarcodeCmd(text));
+                    MKBluetoothPrinterPax.printText(getBarcodeCmd(text));
                 } else if (infoType == 3) {
                     // 发送二维码打印图片前导指令
                     byte[] start = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1B,
                             0x40, 0x1B, 0x33, 0x00};
-                   MKBluetoothPrinter.selectCommand(start);
-                   MKBluetoothPrinter.selectCommand(getQrCodeCmd(text));
+                   MKBluetoothPrinterPax.selectCommand(start);
+                   MKBluetoothPrinterPax.selectCommand(getQrCodeCmd(text));
                     // 发送结束指令
                     byte[] end = {0x1d, 0x4c, 0x1f, 0x00};
-                    MKBluetoothPrinter.selectCommand(end);
+                    MKBluetoothPrinterPax.selectCommand(end);
                 } else if (infoType == 4) {
                     text = text.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "");
 
@@ -575,54 +582,55 @@ public class MKBluetoothPrinter extends CordovaPlugin {
 
                     byte[] decodeString = Base64.decode(text, Base64.DEFAULT);
 
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            printer.printBitmap(decodedByte);
+                    // Bitmap bitmap = BitmapFactory.decodeByteArray(decodeString, 0, bitmapArray.length);
 
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodeString, 0, bitmapArray.length);
 
+                    // bitmap =compressPic(bitmap);
 
-                    bitmap =compressPic(bitmap);
+                    // if(bitmap!=null) {
+                    //     //图片的长和框必须是大于24*size
+                    //     byte[] draw2PxPoint = draw2PxPoint(bitmap);
+                    //     //发送打印图片前导指令
 
-                    if(bitmap!=null) {
-                        //图片的长和框必须是大于24*size
-                        byte[] draw2PxPoint = draw2PxPoint(bitmap);
-                        //发送打印图片前导指令
-
-                        MKBluetoothPrinter.selectCommand(draw2PxPoint);
-                    }
+                    //     MKBluetoothPrinterPax.selectCommand(draw2PxPoint);
+                    // }
 
                     //图片的长和框必须是大于24*size
                 //  byte[] draw2PxPoint = PicFromPrintUtils.draw2PxPoint(bitmap);
                     //发送打印图片前导指令
 
-                 // MKBluetoothPrinter.selectCommand(draw2PxPoint);
+                 // MKBluetoothPrinterPax.selectCommand(draw2PxPoint);
 
 
 
 
-                    //MKBluetoothPrinter.selectCommand(draw2PxPoint);
+                    //MKBluetoothPrinterPax.selectCommand(draw2PxPoint);
                     //InputStream fin = Bitmap2IS(bitmap);
                    //byte[] buffer = getReadBitMapBytes(bitmap);
                     //发送打印图片前导指令
                    //byte[] start = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1B,
                    //       0x40, 0x1B, 0x33, 0x00 };
-                 //  MKBluetoothPrinter.selectCommand(start);
-                   //MKBluetoothPrinter.selectCommandByte(buffer);
+                 //  MKBluetoothPrinterPax.selectCommand(start);
+                   //MKBluetoothPrinterPax.selectCommandByte(buffer);
                       // 发送结束指令
                   //  byte[] end = { 0x1d, 0x4c, 0x1f, 0x00 };
-                  //  MKBluetoothPrinter.selectCommand(end);
-                    //MKBluetoothPrinter.selectCommand(bitmapArray);
+                  //  MKBluetoothPrinterPax.selectCommand(end);
+                    //MKBluetoothPrinterPax.selectCommand(bitmapArray);
                     // 发送结束指令
 
                 } else if (infoType == 5) {
-                    MKBluetoothPrinter.printText(printSeperatorLine());
+                    MKBluetoothPrinterPax.printText(printSeperatorLine());
                 } else if (infoType == 6) {
-                    MKBluetoothPrinter.printText("\n");
+                    MKBluetoothPrinterPax.printText("\n");
                 } else if (infoType == 7) {
-                    MKBluetoothPrinter.printText(text);
+                    MKBluetoothPrinterPax.printText(text);
                 }else if(infoType == 8) {
                     //结束循环时
-                    MKBluetoothPrinter.selectCommand(MKBluetoothPrinter.getCutPaperCmd());
+                    MKBluetoothPrinterPax.selectCommand(MKBluetoothPrinterPax.getCutPaperCmd());
                 }
-                MKBluetoothPrinter.printText("\n");
+                MKBluetoothPrinterPax.printText("\n");
 
 
         } catch (Exception e) {

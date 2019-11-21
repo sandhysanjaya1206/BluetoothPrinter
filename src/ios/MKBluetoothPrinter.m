@@ -1,18 +1,18 @@
 //
-//  MKBluetoothPrinter.m
+//  MKBluetoothPrinterPax.m
 //  CordovaDemo
 //
 //  Created by xmk on 2017/6/20.
 //
 //
 
-#import "MKBluetoothPrinter.h"
+#import "MKBluetoothPrinterPax.h"
 #import "HLBLEManager.h"
 #import "HLPrinter.h"
 #import "MKConst.h"
 #import "MKPrinterInfoModel.h"
 
-@interface MKBluetoothPrinter ()
+@interface MKBluetoothPrinterPax ()
 @property (nonatomic, strong) HLBLEManager *manager;
 @property (nonatomic, strong) NSMutableArray *peripheralsArray;     /*!< 外设列表 */
 @property (nonatomic, copy  ) NSString *scanPeripheralsCallBackId;  /*!< 扫描 接口 callBackId, 用于持续回调JS*/
@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSMutableArray *printerModelArray;    /*!< 打印信息数组 主要用于排序*/
 @end
 
-@implementation MKBluetoothPrinter
+@implementation MKBluetoothPrinterPax
 
 /*
  * 设置打印机纸张宽度
@@ -100,7 +100,7 @@
         self.scanPeripheralsCallBackId = nil;
         self.scanPeripheralsCallBackId = command.callbackId.copy;
         
-        __weak MKBluetoothPrinter *weakSelf = self;
+        __weak MKBluetoothPrinterPax *weakSelf = self;
         [self scanForPeripheralsWithBlock:^(BOOL success, NSString *message) {
             if (success) {
                 [weakSelf callBackPeripheralsWithKeep:bKeepCallBack];
@@ -147,7 +147,7 @@
         return;
     }
     
-    __weak MKBluetoothPrinter *weakSelf = self;
+    __weak MKBluetoothPrinterPax *weakSelf = self;
     [self connectPeripheralWith:peripheralId block:^(BOOL success, NSString *message) {
         [weakSelf callBackSuccess:success callBackId:command.callbackId message:message];
     }];
@@ -158,7 +158,7 @@
     [self.commandDelegate runInBackground:^{
         if (command.arguments.count > 0 && command.arguments[0] != [NSNull null]) {
             NSString *jsonStr = command.arguments[0];
-            __weak MKBluetoothPrinter *weakSelf = self;
+            __weak MKBluetoothPrinterPax *weakSelf = self;
             [self setPrinterInfoWithJsonString:jsonStr block:^(BOOL success, NSString *message) {
                 if (success) {
                     [weakSelf finalPrinterWithBlock:^(BOOL success, NSString *message) {
@@ -226,7 +226,7 @@
     NSString *peripheralName = [self getHistoryPeripheralName];
     if (peripheralName) {
         if (self.peripheralsArray.count > 0){
-            __weak MKBluetoothPrinter *weakSelf = self;
+            __weak MKBluetoothPrinterPax *weakSelf = self;
             [self connectPeripheralWith:peripheralName block:^(BOOL success, NSString *message) {
                 if (success) {
                     ELog(@"autoConnectPeripheral : %@", message);
@@ -243,7 +243,7 @@
 }
 
 - (void)scanPeripheralsAndConnectWithPeripheralName:(NSString *)name{
-    __weak MKBluetoothPrinter *weakSelf = self;
+    __weak MKBluetoothPrinterPax *weakSelf = self;
     [self scanForPeripheralsWithBlock:^(BOOL success, NSString *message) {
         if (success && weakSelf.peripheralsArray.count > 0) {
             [self connectPeripheralWith:name block:nil];
@@ -253,7 +253,7 @@
 
 /** 扫描设备 */
 - (void)scanForPeripheralsWithBlock:(CommandBlcok)block{
-    __weak MKBluetoothPrinter *weakSelf = self;
+    __weak MKBluetoothPrinterPax *weakSelf = self;
     if (self.manager.stateUpdateBlock) {
         //已经设置过状态回调，直接开始扫描
         [self starScanWithBlock:block];
@@ -291,7 +291,7 @@
 }
 /** 开始扫描 */
 - (void)starScanWithBlock:(CommandBlcok)block{
-    __weak MKBluetoothPrinter *weakSelf = self;
+    __weak MKBluetoothPrinterPax *weakSelf = self;
     [self.manager scanForPeripheralsWithServiceUUIDs:nil options:nil didDiscoverPeripheral:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
         ELog(@"peripheral.name : %@", peripheral.name);
         if (peripheral.name.length <= 0) {
@@ -349,7 +349,7 @@
         MKBlockExec(block, NO, [NSString stringWithFormat:@"error: no find the peripheral : %@", string]);
         return;
     }
-    __weak MKBluetoothPrinter *weakSelf = self;
+    __weak MKBluetoothPrinterPax *weakSelf = self;
     [self.manager connectPeripheral:self.connectPeripheral
                      connectOptions:@{CBConnectPeripheralOptionNotifyOnDisconnectionKey:@(YES)}
              stopScanAfterConnected:YES

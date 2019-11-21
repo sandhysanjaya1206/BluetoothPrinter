@@ -32,20 +32,20 @@
         <source-file src="src/ios/MKPrinter/NSString+MKAdd.m" />
         <header-file src="src/ios/MKPrinter/NSString+MKAdd.h" />
 
-        <source-file src="src/ios/MKBluetoothPrinter.m" />
-        <header-file src="src/ios/MKBluetoothPrinter.h" />
+        <source-file src="src/ios/MKBluetoothPrinterPax.m" />
+        <header-file src="src/ios/MKBluetoothPrinterPax.h" />
 
         <config-file target="config.xml" parent="/widget">
-            <feature name="MKBluetoothPrinter">
-                <param name="ios-package" value="MKBluetoothPrinter" />
+            <feature name="MKBluetoothPrinterPax">
+                <param name="ios-package" value="MKBluetoothPrinterPax" />
             </feature>
         </config-file>
     </platform>
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="MKBluetoothPrinter">
-                <param name="android-package" value="cn.sj.cordova.bluetoothprint.MKBluetoothPrinter"/>
+            <feature name="MKBluetoothPrinterPax">
+                <param name="android-package" value="cn.sj.cordova.bluetoothprintpax.MKBluetoothPrinterPax"/>
             </feature>
         </config-file>
 
@@ -65,8 +65,8 @@
 
        
 
-        <source-file src="src/android/MKBluetoothPrinter.java" target-dir="src/cn/sj/cordova/bluetoothprint"/>
-        
+        <source-file src="src/android/MKBluetoothPrinterPax.java" target-dir="src/cn/sj/cordova/bluetoothprintpax"/>
+        <source-file src="src/android/libs/Pax.jar" target-dir="libs" />
 
     </platform>
 </plugin>

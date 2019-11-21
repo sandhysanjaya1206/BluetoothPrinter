@@ -6,28 +6,28 @@ function BluetoothPrinter(){};
  * 设置打印机宽度
  */
  BluetoothPrinter.prototype.setPrinterPageWidth = function(success, fail, width){
-    exec(success, fail, 'MKBluetoothPrinter', 'setPrinterPageWidth',[width]);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'setPrinterPageWidth',[width]);
  }
 
 /*
  * 设置(3、4列)第一列字符最大长度打印机宽度
  */
 BluetoothPrinter.prototype.setFirstRankMaxLength = function(success, fail, text3, text4){
-    exec(success, fail, 'MKBluetoothPrinter', 'setFirstRankMaxLength', [text3,text4])
+    exec(success, fail, 'MKBluetoothPrinterPax', 'setFirstRankMaxLength', [text3,text4])
 }
 
 /*
  * 获取当前设置的纸张宽度
  */
 BluetoothPrinter.prototype.getCurrentSetPageWidth = function(success, fail){
-    exec(success, fail, 'MKBluetoothPrinter', 'getCurrentSetPageWidth');
+    exec(success, fail, 'MKBluetoothPrinterPax', 'getCurrentSetPageWidth');
 }
 
 /*
  * 自动连接 历史连接过的设备
  */
 BluetoothPrinter.prototype.autoConnectPeripheral = function(success, fail){
-    exec(success, fail, 'MKBluetoothPrinter', 'autoConnectPeripheral', []);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'autoConnectPeripheral', []);
 }
 
 /** 
@@ -35,7 +35,7 @@ BluetoothPrinter.prototype.autoConnectPeripheral = function(success, fail){
  * 返回： "1":是  "0":否
  */
 BluetoothPrinter.prototype.isConnectPeripheral = function(success, fail){
-    exec(success, fail, 'MKBluetoothPrinter', 'isConnectPeripheral', []);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'isConnectPeripheral', []);
 }
 
 
@@ -48,12 +48,12 @@ BluetoothPrinter.prototype.isConnectPeripheral = function(success, fail){
  * 返回扫描到的外设列表信息(有可能为空)，在扫描的回调中返回，会有延时
  */
 BluetoothPrinter.prototype.scanForPeripherals = function(success, fail, keep){
-    exec(success, fail, 'MKBluetoothPrinter', 'scanForPeripherals', [keep]);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'scanForPeripherals', [keep]);
 }
 
 /** 停止扫描 */
 BluetoothPrinter.prototype.stopScan = function(success, fail){
-    exec(success, fail, 'MKBluetoothPrinter', 'stopScan', [])
+    exec(success, fail, 'MKBluetoothPrinterPax', 'stopScan', [])
 }
 
 /**
@@ -63,7 +63,7 @@ BluetoothPrinter.prototype.stopScan = function(success, fail){
  * [{"name":"Printer_2EC1","uuid":"9A87E98E-BE88-5BA6-2C31-ED4869300E6E"}]
  */
 BluetoothPrinter.prototype.getDeviceList = function(success, fail){
-    exec(success,fail, 'MKBluetoothPrinter', 'getPeripherals',[]);
+    exec(success,fail, 'MKBluetoothPrinterPax', 'getPeripherals',[]);
 }
 
 /**
@@ -72,7 +72,7 @@ BluetoothPrinter.prototype.getDeviceList = function(success, fail){
  * 连接成功后，停止扫描。
  */
 BluetoothPrinter.prototype.connectPeripheral = function(success, fail, uuid){
-    exec(success, fail, 'MKBluetoothPrinter', 'connectPeripheral', [uuid]);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'connectPeripheral', [uuid]);
 }
 
 /**
@@ -80,17 +80,17 @@ BluetoothPrinter.prototype.connectPeripheral = function(success, fail, uuid){
  * 参数jsonString， json数组字符串
  */
 BluetoothPrinter.prototype.setPrinterInfoAndPrinter = function(success, fail, jsonString){
-    exec(success, fail, 'MKBluetoothPrinter', 'setPrinterInfoAndPrinter', [jsonString]);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'setPrinterInfoAndPrinter', [jsonString]);
 }
 
 //断开连接
 BluetoothPrinter.prototype.stopConnection = function(success, fail){
-    exec(success, fail, 'MKBluetoothPrinter', 'stopPeripheralConnection', []);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'stopPeripheralConnection', []);
 }
 
 //在Xcode控制台打印log
 BluetoothPrinter.prototype.printOCLog = function(success, fail, message){
-    exec(success, fail, 'MKBluetoothPrinter', 'printLog', [message]);
+    exec(success, fail, 'MKBluetoothPrinterPax', 'printLog', [message]);
 }
 
 
