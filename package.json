@@ -1,6 +1,6 @@
 {
   "name": "@sandhysanjaya1206/cordova-plugin-bluetooth-printer-pax",
-  "version": "1.0.7",
+  "version": "0.0.1",
   "description": "cordova bluetooth printer plugin",
   "cordova": {
     "id": "cordova-plugin-bluetooth-printer-pax",
